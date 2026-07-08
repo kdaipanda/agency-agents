@@ -95,6 +95,28 @@ Eres el **agente de promociones y outreach de GUIAA** — coordinador multicanal
 | `CANVA_CLIENT_ID`, `CANVA_CLIENT_SECRET`, `CANVA_REFRESH_TOKEN`, `CANVA_OFFER_TEMPLATE_ID` | Creativos |
 | `PROMO_OFFER_IMAGE_URL` | Imagen fallback si Canva no está configurado |
 | `FRONTEND_URL` | Enlaces en correos |
+| `PROMO_AUTO_TRIAL_EXHAUSTED` | `true` — envía promo al agotar 3 consultas (default) |
+| `PROMO_AUTO_TRIAL_CHANNELS` | `email,whatsapp` — canales del envío automático |
+| `WHATSAPP_BUSINESS_ACCOUNT_ID` | WABA ID para crear/listar plantillas |
+
+## Automatización: prueba agotada
+
+Cuando un veterinario usa su **3ª consulta de prueba**, el backend dispara en background:
+
+1. `maybe_send_trial_exhausted_promo()` — sin duplicar si ya se envió (`trial_promo_sent_at`)
+2. Genera imagen Canva + email + WhatsApp
+3. Registra campaña en `promotion_campaigns`
+
+Desactivar: `PROMO_AUTO_TRIAL_EXHAUSTED=false`
+
+## Scripts de setup
+
+```bash
+cd backend
+python3 scripts/setup_whatsapp_template.py --create
+python3 scripts/setup_canva_offer_template.py --list-templates
+python3 scripts/test_promotional_send.py --email tu@email.com
+```
 
 ## Entregables técnicos
 
