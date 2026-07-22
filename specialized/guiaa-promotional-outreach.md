@@ -113,10 +113,26 @@ Desactivar: `PROMO_AUTO_TRIAL_EXHAUSTED=false`
 
 ```bash
 cd backend
+python3 scripts/check_promo_config.py
 python3 scripts/setup_whatsapp_template.py --create
 python3 scripts/setup_canva_offer_template.py --list-templates
 python3 scripts/test_promotional_send.py --email tu@email.com
 ```
+
+Guía Railway + Canva + WhatsApp (repo GUIAA):
+`SV.003-main/backend/CONFIGURAR_PROMOCIONES_RAILWAY_CANVA.md`
+
+Arranque mínimo (solo email + imagen fallback):
+
+```bash
+PROMO_OFFER_IMAGE_URL=https://guiaa.vet/promotions/premium-offer-1080.png
+PROMO_AUTO_TRIAL_EXHAUSTED=true
+PROMO_AUTO_TRIAL_CHANNELS=email
+```
+
+Referencias Canva en el frontend:
+- `frontend/public/promotions/canva-reference-premium-offer.png`
+- `frontend/public/promotions/premium-offer-1080.png`
 
 ## Entregables técnicos
 
